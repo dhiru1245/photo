@@ -15,8 +15,7 @@ from Img_to_vecCosine_Project.settings import MEDIA_ROOT
 
 def handle_uploaded_file(f):
     name = str(datetime.datetime.now().strftime('%H%M%S')) + str(random.randint(0, 1000)) + str(f)
-    path = default_storage.save(MEDIA_ROOT + '/' + name,
-                                ContentFile(f.read()))
+    path = default_storage.save(f'{MEDIA_ROOT}/{name}', ContentFile(f.read()))
     return os.path.join(MEDIA_ROOT, path), name
 
 def index(request):
@@ -109,6 +108,6 @@ class Img2Vec:
             return model, layer
 
         else:
-            raise KeyError('Model %s was not found' % model_name)
+            raise KeyError(f'Model {model_name} was not found')
 
 
